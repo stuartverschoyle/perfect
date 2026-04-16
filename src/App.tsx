@@ -25,11 +25,17 @@ import LocalSeoSection from './sections/LocalSeoSection';
 import AccessibilitySection from './sections/AccessibilitySection';
 import TypographySection from './sections/TypographySection';
 import ChecklistSection from './sections/ChecklistSection';
+import SeoDocument from './seo/SeoDocument';
+import { getGuidePageMeta } from './seo/guideMeta';
+import { buildGuideJsonLd } from './seo/jsonLd';
+import { DEFAULT_OG_IMAGE } from './seo/site';
 
 const Divider = () => <div className="border-t border-slate-200 dark:border-slate-800/50" />;
 
 function App() {
   const { sectionId } = useParams<{ sectionId?: string }>();
+  const pageMeta = getGuidePageMeta(sectionId);
+  const jsonLd = buildGuideJsonLd(sectionId);
 
   useEffect(() => {
     if (sectionId) {
@@ -46,6 +52,14 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 transition-colors duration-300">
+      <SeoDocument
+        title={pageMeta.title}
+        description={pageMeta.description}
+        canonicalPath={pageMeta.path}
+        ogType="website"
+        ogImage={DEFAULT_OG_IMAGE}
+        jsonLd={jsonLd}
+      />
       <Navigation />
       <AccessibilityToolbar />
 

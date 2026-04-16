@@ -16,6 +16,10 @@ import ExampleCTA from './ExampleCTA';
 import ExampleFooter from './ExampleFooter';
 import ExampleAnnotationBar from './ExampleAnnotationBar';
 import AccessibilityToolbar from '../components/AccessibilityToolbar';
+import SeoDocument from '../seo/SeoDocument';
+import { buildExampleJsonLd } from '../seo/jsonLd';
+import { EXAMPLE_CANONICAL_PATH, EXAMPLE_PAGE_DESCRIPTION, EXAMPLE_PAGE_TITLE } from '../seo/exampleMeta';
+import { DEFAULT_OG_IMAGE } from '../seo/site';
 
 export default function ExamplePage() {
   useEffect(() => {
@@ -24,6 +28,14 @@ export default function ExamplePage() {
 
   return (
     <div className="relative min-h-screen bg-white dark:bg-[#0a0a0a] text-slate-900 dark:text-white font-sans">
+      <SeoDocument
+        title={EXAMPLE_PAGE_TITLE}
+        description={EXAMPLE_PAGE_DESCRIPTION}
+        canonicalPath={EXAMPLE_CANONICAL_PATH}
+        ogType="article"
+        ogImage={DEFAULT_OG_IMAGE}
+        jsonLd={buildExampleJsonLd()}
+      />
       <ExampleSkipLink />
       <ExampleAnnotationBar />
       <ExampleReadingProgress />

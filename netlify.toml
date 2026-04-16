@@ -5,6 +5,8 @@
 [build.environment]
   NODE_VERSION = "20"
   PLAYWRIGHT_BROWSERS_PATH = "node_modules/.cache/ms-playwright"
+  # Set to your live URL (no trailing slash) so prerendered canonicals & og:url are correct, e.g.:
+  # VITE_SITE_URL = "https://your-site.netlify.app"
 
 # Static prerendered files (e.g. /example/index.html) shadow this rewrite when present.
 [[redirects]]

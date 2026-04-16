@@ -28,7 +28,7 @@ export default function HeroSection() {
         </h1>
 
         <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mb-8 leading-relaxed">
-          An interactive guide for copywriters and designers. Click the info icons to discover how every element -- from meta tags to schema markup -- impacts search rankings, user experience, and conversions.
+          An interactive guide for copywriters, designers and developers. Click the info icons to discover how every element -- from meta tags to schema markup -- impacts search rankings, user experience, and conversions.
         </p>
 
         <div className="grid sm:grid-cols-3 gap-4 max-w-2xl mb-6">
