@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useLayoutEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { Info, X } from 'lucide-react';
-import { useAnnotation, type AnnotationTipRole } from '../context/AnnotationContext';
+import { useAnnotation, type AnnotationRole, type AnnotationTipRole } from '../context/AnnotationContext';
 
 export type AnnotationTone = 'amber' | 'teal' | 'violet' | 'sky' | 'rose' | 'emerald' | 'orange';
 
@@ -33,6 +33,10 @@ interface SeoAnnotationProps {
 
 function rolesWithContent(byRole: AnnotationByRole): AnnotationTipRole[] {
   return ROLE_ORDER.filter((r) => byRole[r] != null);
+}
+
+function isTipRole(role: AnnotationRole): role is AnnotationTipRole {
+  return role !== 'all';
 }
 
 function isAnnotationChromeTarget(target: EventTarget | null): boolean {
@@ -119,8 +123,7 @@ export default function SeoAnnotation({ label, byRole, position = 'top-right', t
   const applicable = useMemo(() => rolesWithContent(byRole), [byRole]);
 
   const visible =
-    applicable.length > 0 &&
-    (role === 'all' || (role !== 'all' && applicable.includes(role as AnnotationTipRole)));
+    applicable.length > 0 && (role === 'all' || (isTipRole(role) && applicable.includes(role)));
 
   useEffect(() => {
     function handlePointerDown(e: MouseEvent) {
@@ -154,6 +157,8 @@ export default function SeoAnnotation({ label, byRole, position = 'top-right', t
 
   useLayoutEffect(() => {
     if (!open || !visible) return;
+
+    let rafId = 0;
 
     function updatePosition() {
       const marker = markerRef.current;
@@ -198,14 +203,19 @@ export default function SeoAnnotation({ label, byRole, position = 'top-right', t
       setPanelPos({ top, left });
     }
 
-    updatePosition();
-    const raf = requestAnimationFrame(updatePosition);
-    window.addEventListener('scroll', updatePosition, true);
-    window.addEventListener('resize', updatePosition);
+    function schedulePosition() {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updatePosition);
+    }
+
+    schedulePosition();
+    const scrollOpts = { passive: true, capture: true } as const;
+    window.addEventListener('scroll', schedulePosition, scrollOpts);
+    window.addEventListener('resize', schedulePosition);
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('scroll', updatePosition, true);
-      window.removeEventListener('resize', updatePosition);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', schedulePosition, scrollOpts);
+      window.removeEventListener('resize', schedulePosition);
     };
   }, [open, visible, position, role, panelBody]);
 

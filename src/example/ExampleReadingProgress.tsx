@@ -5,17 +5,26 @@ export default function ExampleReadingProgress() {
   const [pct, setPct] = useState(0);
 
   useEffect(() => {
+    let raf = 0;
+
     const update = () => {
       const el = document.documentElement;
       const scrollable = el.scrollHeight - el.clientHeight;
       setPct(scrollable > 0 ? Math.min(100, Math.max(0, (el.scrollTop / scrollable) * 100)) : 0);
     };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+
+    const schedule = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+
+    schedule();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
     return () => {
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      cancelAnimationFrame(raf);
     };
   }, []);
 

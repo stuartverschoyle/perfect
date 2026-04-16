@@ -57,6 +57,11 @@ async function main() {
         },
         { timeout: 60_000 }
       );
+      if (route === EXAMPLE_PATH) {
+        await page.waitForSelector('#main-content', { timeout: 60_000 });
+      } else {
+        await page.waitForSelector('#why-optimise', { timeout: 60_000 });
+      }
       await new Promise((r) => setTimeout(r, 400));
       const html = await page.content();
       const out = outPathForRoute(route);

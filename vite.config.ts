@@ -43,6 +43,20 @@ export default defineConfig(({ mode }) => {
             'import.meta.env.VITE_SITE_URL': JSON.stringify(siteUrl),
           }
         : {},
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return;
+            if (id.includes('react-dom')) return 'vendor-react-dom';
+            if (id.includes('react-router')) return 'vendor-router';
+            if (id.includes('react-helmet')) return 'vendor-helmet';
+            if (id.includes('/react/') || id.includes('\\react\\')) return 'vendor-react';
+            if (id.includes('lucide-react')) return 'vendor-icons';
+          },
+        },
+      },
+    },
     optimizeDeps: {
       exclude: ['lucide-react'],
     },

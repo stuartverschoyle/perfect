@@ -5,8 +5,28 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', 'Liberation Mono', 'Menlo', 'monospace'],
+        sans: [
+          'Inter Variable',
+          'Inter',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
+        mono: [
+          'JetBrains Mono Variable',
+          'JetBrains Mono',
+          'Fira Code',
+          'SF Mono',
+          'Consolas',
+          'Liberation Mono',
+          'Menlo',
+          'monospace',
+        ],
       },
     },
   },

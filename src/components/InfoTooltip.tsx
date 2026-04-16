@@ -4,12 +4,14 @@ import { Info, X } from 'lucide-react';
 interface InfoTooltipProps {
   title: string;
   children: React.ReactNode;
-  variant?: 'default' | 'warning' | 'success';
+  variant?: 'default' | 'warning' | 'success' | 'info';
 }
 
 export default function InfoTooltip({ title, children, variant = 'default' }: InfoTooltipProps) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+
+  const resolvedVariant = variant === 'info' ? 'default' : variant;
 
   const variantStyles = {
     default: 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700',
@@ -44,8 +46,9 @@ export default function InfoTooltip({ title, children, variant = 'default' }: In
   return (
     <span className="relative inline-flex items-center">
       <button
+        type="button"
         onClick={() => setOpen(!open)}
-        className={`inline-flex items-center justify-center w-6 h-6 rounded-full transition-all duration-200 ${iconStyles[variant]}`}
+        className={`inline-flex h-6 w-6 items-center justify-center rounded-full transition-all duration-200 ${iconStyles[resolvedVariant]}`}
         aria-label={`Info: ${title}`}
       >
         <Info size={14} strokeWidth={2.5} />
@@ -56,14 +59,15 @@ export default function InfoTooltip({ title, children, variant = 'default' }: In
           <div className="fixed inset-0 bg-black/40 z-40 md:hidden" onClick={() => setOpen(false)} />
           <div
             ref={panelRef}
-            className={`absolute z-50 w-80 sm:w-96 rounded-xl border shadow-2xl ${variantStyles[variant]} left-0 top-full mt-2`}
+            className={`absolute left-0 top-full z-50 mt-2 w-80 rounded-xl border shadow-2xl sm:w-96 ${variantStyles[resolvedVariant]}`}
             style={{ maxHeight: '80vh' }}
           >
             <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200/50 dark:border-white/10">
-              <h4 className={`font-semibold text-sm ${headerStyles[variant]}`}>{title}</h4>
+              <h4 className={`text-sm font-semibold ${headerStyles[resolvedVariant]}`}>{title}</h4>
               <button
+                type="button"
                 onClick={() => setOpen(false)}
-                className="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors"
+                className="text-slate-400 transition-colors hover:text-slate-700 dark:hover:text-white"
               >
                 <X size={16} />
               </button>

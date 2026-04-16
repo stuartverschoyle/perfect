@@ -9,12 +9,14 @@ export default function ExampleHero() {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden" aria-label="Hero">
       <div className="absolute inset-0">
         <img
-          src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+          src="/computer-with-code.webp"
           alt="Computer screen displaying website code and performance metrics for website optimisation"
           width={1920}
-          height={1080}
+          height={1275}
           loading="eager"
-          className="w-full h-full object-cover"
+          decoding="async"
+          fetchPriority="high"
+          className="h-full w-full object-cover"
         />
         <SeoAnnotation
           label="Hero image"
@@ -47,12 +49,12 @@ export default function ExampleHero() {
               <>
                 <p className="font-semibold text-slate-900 dark:text-white mb-1">Size, loading &amp; LCP</p>
                 <p>
-                  This asset is <code className="text-teal-600 dark:text-teal-400">1920×1080</code> with explicit <code className="text-teal-600 dark:text-teal-400">width</code> / <code className="text-teal-600 dark:text-teal-400">height</code> and{' '}
+                  This asset is <code className="text-teal-600 dark:text-teal-400">1920×1275</code> with explicit <code className="text-teal-600 dark:text-teal-400">width</code> / <code className="text-teal-600 dark:text-teal-400">height</code> and{' '}
                   <code className="text-teal-600 dark:text-teal-400">loading=&quot;eager&quot;</code> because it is likely the LCP element.
                 </p>
                 <p className="mt-1.5">
-                  In production, serve <code className="text-teal-600 dark:text-teal-400">srcset</code> + <code className="text-teal-600 dark:text-teal-400">sizes</code> (or <code className="text-teal-600 dark:text-teal-400">&lt;picture&gt;</code> with AVIF/WebP), cap decoded megapixels on mobile, and add{' '}
-                  <code className="text-teal-600 dark:text-teal-400">fetchpriority=&quot;high&quot;</code> only on this hero — not on every image.
+                  The hero uses a same-origin WebP (<code className="text-teal-600 dark:text-teal-400">/computer-with-code.webp</code>) with{' '}
+                  <code className="text-teal-600 dark:text-teal-400">decoding=&quot;async&quot;</code> and <code className="text-teal-600 dark:text-teal-400">fetchPriority=&quot;high&quot;</code>. Add <code className="text-teal-600 dark:text-teal-400">srcset</code>/<code className="text-teal-600 dark:text-teal-400">sizes</code> or <code className="text-teal-600 dark:text-teal-400">&lt;picture&gt;</code> when you ship multiple widths.
                 </p>
                 <p className="mt-1.5 text-teal-600 dark:text-teal-400 font-medium">Lazy-load everything below the fold; preload only the true LCP candidate.</p>
               </>
