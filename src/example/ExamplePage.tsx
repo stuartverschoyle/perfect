@@ -16,6 +16,7 @@ import ExampleCTA from './ExampleCTA';
 import ExampleFooter from './ExampleFooter';
 import ExampleAnnotationBar from './ExampleAnnotationBar';
 import AccessibilityToolbar from '../components/AccessibilityToolbar';
+import PrerenderReadyMarker from '../components/PrerenderReadyMarker';
 import SeoDocument from '../seo/SeoDocument';
 import { buildExampleJsonLd } from '../seo/jsonLd';
 import { EXAMPLE_CANONICAL_PATH, EXAMPLE_PAGE_DESCRIPTION, EXAMPLE_PAGE_TITLE } from '../seo/exampleMeta';
@@ -59,6 +60,7 @@ export default function ExamplePage() {
         <ExampleCTA />
       </main>
       <ExampleFooter />
+      <PrerenderReadyMarker selector="#main-content" />
     </div>
   );
 }

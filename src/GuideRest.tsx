@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import PrerenderReadyMarker from './components/PrerenderReadyMarker';
 
 const WhyOptimiseSection = lazy(() => import('./sections/WhyOptimiseSection'));
 const MetaSection = lazy(() => import('./sections/MetaSection'));
@@ -138,6 +139,7 @@ export default function GuideRest() {
           20 sections covering every aspect of building and maintaining a perfect SEO web page.
         </p>
       </footer>
+      <PrerenderReadyMarker selector="#why-optimise" />
     </>
   );
 }
