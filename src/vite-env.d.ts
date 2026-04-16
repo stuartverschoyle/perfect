@@ -3,6 +3,8 @@
 interface Window {
   /** Set when route-specific content is in the DOM for prerender capture. */
   __PRERENDER_READY__?: boolean;
+  /** Alias for hosts / plugins that expect camelCase `prerenderReady`. */
+  prerenderReady?: boolean;
 }
 
 interface ImportMetaEnv {

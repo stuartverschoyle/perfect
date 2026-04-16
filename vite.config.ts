@@ -48,10 +48,10 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks(id) {
             if (!id.includes('node_modules')) return;
-            if (id.includes('react-dom')) return 'vendor-react-dom';
+            /** Do not split `react` / `react-dom` out: Rollup chunk order can trigger TDZ ("Cannot access … before initialization") in prerender. */
+            if (id.includes('react-dom') || id.includes('/react/') || id.includes('\\react\\')) return;
             if (id.includes('react-router')) return 'vendor-router';
             if (id.includes('react-helmet')) return 'vendor-helmet';
-            if (id.includes('/react/') || id.includes('\\react\\')) return 'vendor-react';
             if (id.includes('lucide-react')) return 'vendor-icons';
           },
         },

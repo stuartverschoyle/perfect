@@ -1,29 +1,50 @@
 import { useEffect } from 'react';
 
+function setReady(value: boolean) {
+  if (typeof window === 'undefined') return;
+  window.__PRERENDER_READY__ = value;
+  window.prerenderReady = value;
+}
+
 /**
- * Sets `window.__PRERENDER_READY__` when `selector` matches an element in the document,
- * so static prerender (Playwright / Netlify) can wait for lazy route UI before capturing HTML.
+ * Signals prerender capture once `selector` matches an element (sync check + rAF polling).
+ * Sets both `window.__PRERENDER_READY__` and `window.prerenderReady` for Netlify / Playwright compatibility.
  */
 export default function PrerenderReadyMarker({ selector }: { selector: string }) {
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    window.__PRERENDER_READY__ = false;
+    setReady(false);
 
     let cancelled = false;
     let raf = 0;
     let frames = 0;
-    const maxFrames = 7200;
+    const maxFrames = 12_000;
+
+    const query = () => {
+      try {
+        return document.querySelector(selector);
+      } catch {
+        return null;
+      }
+    };
+
+    const mark = () => {
+      if (cancelled) return;
+      setReady(true);
+    };
+
+    if (query()) {
+      mark();
+      return () => {
+        cancelled = true;
+        setReady(false);
+      };
+    }
 
     const poll = () => {
       if (cancelled) return;
-      try {
-        if (document.querySelector(selector)) {
-          window.__PRERENDER_READY__ = true;
-          return;
-        }
-      } catch {
-        /* invalid selector */
+      if (query()) {
+        mark();
+        return;
       }
       frames += 1;
       if (frames > maxFrames) {
@@ -38,7 +59,7 @@ export default function PrerenderReadyMarker({ selector }: { selector: string })
     return () => {
       cancelled = true;
       cancelAnimationFrame(raf);
-      window.__PRERENDER_READY__ = false;
+      setReady(false);
     };
   }, [selector]);
 
