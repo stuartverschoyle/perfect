@@ -278,12 +278,12 @@ export default function SeoAnnotation({ label, byRole, position = 'top-right', t
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className={`group flex items-center gap-1 px-2.5 py-1 rounded-full border text-[10px] font-semibold uppercase tracking-wider shadow-sm hover:brightness-95 dark:hover:brightness-110 transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-400 dark:focus-visible:ring-offset-slate-900 ${styles.chip}`}
+          className={`group flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 py-2 sm:min-h-0 sm:min-w-0 sm:gap-1 sm:px-2.5 sm:py-1 rounded-full border text-xs sm:text-[10px] font-semibold uppercase tracking-wide sm:tracking-wider shadow-sm hover:brightness-95 dark:hover:brightness-110 transition-all sm:hover:scale-105 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-400 dark:focus-visible:ring-offset-slate-900 touch-manipulation ${styles.chip}`}
           aria-label={chipAria}
           aria-expanded={open}
         >
-          <Info size={11} strokeWidth={3} className={styles.chipIcon} />
-          <span className="hidden sm:inline">{label}</span>
+          <Info strokeWidth={2.75} className={`h-[1.125rem] w-[1.125rem] sm:h-[11px] sm:w-[11px] shrink-0 ${styles.chipIcon}`} aria-hidden />
+          <span className="hidden sm:inline max-w-[12rem] truncate md:max-w-none">{label}</span>
         </button>
       </span>
       {portaledPanel}

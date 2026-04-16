@@ -51,7 +51,7 @@ function App() {
   }, [sectionId]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 transition-colors duration-300">
+    <div className="min-h-screen max-w-[100vw] overflow-x-hidden bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 transition-colors duration-300">
       <SeoDocument
         title={pageMeta.title}
         description={pageMeta.description}
@@ -63,8 +63,8 @@ function App() {
       <Navigation />
       <AccessibilityToolbar />
 
-      <main className="lg:ml-72">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      <main className="min-w-0 lg:ml-72 pt-16 lg:pt-0">
+        <div className="max-w-4xl mx-auto min-w-0 px-4 sm:px-6 lg:px-8 py-8 lg:py-12 break-words [overflow-wrap:anywhere]">
           <HeroSection />
 
           <div className="space-y-16">

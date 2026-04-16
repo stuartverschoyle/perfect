@@ -37,7 +37,7 @@ export default function MetaSection() {
             </ul>
           </InfoTooltip>
         </div>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid min-w-0 gap-4 md:grid-cols-2">
           <div className="rounded-xl border border-emerald-200 dark:border-emerald-500/20 bg-white dark:bg-slate-900/40 p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
               <h4 className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">Good</h4>
@@ -117,7 +117,7 @@ export default function MetaSection() {
             </ul>
           </InfoTooltip>
         </div>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid min-w-0 gap-4 md:grid-cols-2">
           <div className="rounded-xl border border-emerald-200 dark:border-emerald-500/20 bg-white dark:bg-slate-900/40 p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
               <h4 className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">Good</h4>

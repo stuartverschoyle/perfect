@@ -10,7 +10,7 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-sky-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
       <div className="relative">
-        <div className="flex items-center gap-2 mb-4">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-500/10 border border-teal-300 dark:border-teal-500/20">
             <Search size={12} className="text-teal-600 dark:text-teal-400" />
             <span className="text-xs font-medium text-teal-600 dark:text-teal-400">Interactive SEO Reference</span>

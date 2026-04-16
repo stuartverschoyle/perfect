@@ -27,7 +27,7 @@ export default function ExamplePage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-[#0a0a0a] text-slate-900 dark:text-white font-sans">
+    <div className="relative min-h-screen max-w-[100vw] overflow-x-hidden bg-white font-sans text-slate-900 dark:bg-[#0a0a0a] dark:text-white">
       <SeoDocument
         title={EXAMPLE_PAGE_TITLE}
         description={EXAMPLE_PAGE_DESCRIPTION}
@@ -44,7 +44,7 @@ export default function ExamplePage() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0a]"
+        className="min-w-0 break-words outline-none [overflow-wrap:anywhere] focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0a0a0a]"
       >
         <ExampleHero />
         <ExampleEEAT />

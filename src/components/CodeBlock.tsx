@@ -16,7 +16,7 @@ export default function CodeBlock({ code, language = 'html' }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative group rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-700/50 my-3">
+    <div className="group relative my-3 max-w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700/50 dark:bg-slate-950">
       <div className="flex items-center justify-between px-3 py-1.5 bg-slate-50 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-700/50">
         <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider">{language}</span>
         <button
@@ -27,7 +27,7 @@ export default function CodeBlock({ code, language = 'html' }: CodeBlockProps) {
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>
-      <pre className="px-3 py-3 overflow-x-auto text-[13px] leading-relaxed">
+      <pre className="max-w-full min-w-0 overflow-x-auto px-3 py-3 text-[13px] leading-relaxed">
         <code className="text-emerald-700 dark:text-emerald-300 font-mono">{code}</code>
       </pre>
     </div>

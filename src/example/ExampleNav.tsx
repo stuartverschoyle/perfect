@@ -37,6 +37,20 @@ export default function ExampleNav() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [mobileOpen]);
+
   const scrollToDemoSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -88,8 +102,8 @@ export default function ExampleNav() {
           }}
         />
 
-        <div className="flex items-center justify-between h-20 gap-4">
-          <div className="relative flex items-center gap-2.5">
+        <div className="flex h-20 min-w-0 items-center justify-between gap-3 sm:gap-4">
+          <div className="relative flex min-w-0 items-center gap-2">
             <SeoAnnotation
               label="Brand lockup"
               position="bottom-left"
@@ -123,22 +137,22 @@ export default function ExampleNav() {
                 e.preventDefault();
                 scrollToTop();
               }}
-              className="flex items-center gap-2.5 group"
+              className="group flex min-w-0 max-w-[calc(100vw-5.5rem)] items-center gap-2 sm:max-w-none sm:gap-2.5"
               aria-label="Go to top of page"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-teal-500/20 transition-all">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-emerald-500 transition-all group-hover:shadow-lg group-hover:shadow-teal-500/20">
                 <Search size={18} className="text-white" />
               </div>
-              <div className="flex flex-col">
+              <div className="flex min-w-0 flex-1 flex-col">
                 <span
-                  className={`text-lg font-bold tracking-tight ${
+                  className={`block truncate text-lg font-bold tracking-tight ${
                     scrolled ? (theme === 'dark' ? 'text-white' : 'text-slate-900') : 'text-white'
                   }`}
                 >
                   Optimise
                 </span>
                 <span
-                  className={`text-[11px] tracking-[0.22em] uppercase -mt-0.5 ${
+                  className={`mt-0.5 block text-[10px] uppercase leading-tight tracking-[0.18em] text-balance sm:text-[11px] sm:tracking-[0.22em] ${
                     scrolled ? (theme === 'dark' ? 'text-white/70' : 'text-slate-700') : 'text-white/80'
                   }`}
                 >
@@ -270,7 +284,7 @@ export default function ExampleNav() {
             </Link>
           </div>
 
-          <div className="relative lg:hidden">
+          <div className="relative shrink-0 lg:hidden">
             <SeoAnnotation
               label="Mobile menu"
               position="top-right"
@@ -300,40 +314,73 @@ export default function ExampleNav() {
               }}
             />
             <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 text-slate-900/70 dark:text-white/70 hover:text-slate-900 dark:hover:text-white transition-colors"
-              aria-label="Toggle menu"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl p-2 text-slate-900/80 transition-colors hover:text-slate-900 touch-manipulation dark:text-white/80 dark:hover:text-white"
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
+              aria-controls="example-mobile-menu"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
-        {mobileOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white/98 dark:bg-[#0a0a0a]/98 backdrop-blur-md border-b border-slate-200 dark:border-white/5 py-4 px-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={`#${link.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMobileOpen(false);
-                  scrollToDemoSection(link.id);
-                }}
-                className="block py-3 text-sm font-medium text-slate-900 hover:text-slate-950 dark:text-white/80 dark:hover:text-white tracking-wide border-b border-slate-200 dark:border-white/5 transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-            <Link
-              to={guideSectionPath('checklist')}
-              className="block mt-4 text-center px-5 py-3 bg-teal-500 text-white text-sm font-semibold rounded-lg"
+        {mobileOpen ? (
+          <>
+            <button
+              type="button"
+              className="fixed inset-0 z-[201000] bg-black/50 backdrop-blur-[2px] lg:hidden"
+              aria-label="Close menu"
+              onClick={() => setMobileOpen(false)}
+            />
+            <div
+              id="example-mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site navigation"
+              className="fixed inset-0 z-[201010] flex flex-col bg-white dark:bg-[#0a0a0a] lg:hidden"
             >
-              Get the checklist
-            </Link>
-          </div>
-        )}
+              <div className="flex min-h-[4.5rem] items-center border-b border-slate-200 px-2 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 dark:border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  className="inline-flex min-h-[48px] min-w-[48px] shrink-0 items-center justify-center rounded-xl text-slate-900 transition-colors hover:bg-slate-100 dark:text-white dark:hover:bg-white/10"
+                  aria-label="Close menu"
+                >
+                  <X size={24} strokeWidth={2.25} />
+                </button>
+                <span className="pointer-events-none min-w-0 flex-1 px-2 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-white/50">
+                  Menu
+                </span>
+                <span className="w-12 shrink-0" aria-hidden="true" />
+              </div>
+              <nav className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={`#${link.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileOpen(false);
+                      scrollToDemoSection(link.id);
+                    }}
+                    className="block border-b border-slate-200 py-3.5 text-base font-medium tracking-wide text-slate-900 transition-colors [overflow-wrap:anywhere] hover:text-slate-950 dark:border-white/10 dark:text-white/90 dark:hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <Link
+                  to={guideSectionPath('checklist')}
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-6 block rounded-lg bg-teal-500 px-5 py-3.5 text-center text-sm font-semibold text-white"
+                >
+                  Get the checklist
+                </Link>
+              </nav>
+            </div>
+          </>
+        ) : null}
       </nav>
     </header>
   );

@@ -297,7 +297,7 @@ export default function SerpSocialPreviewPlayground() {
   };
 
   return (
-    <div className="rounded-xl border border-sky-200 dark:border-sky-500/30 bg-gradient-to-br from-sky-50/80 to-white dark:from-sky-950/20 dark:to-slate-900/40 p-5 space-y-5">
+    <div className="min-w-0 space-y-5 rounded-xl border border-sky-200 bg-gradient-to-br from-sky-50/80 to-white p-5 dark:border-sky-500/30 dark:from-sky-950/20 dark:to-slate-900/40">
       <div>
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Interactive SERP & social preview</h3>
         <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
@@ -305,8 +305,8 @@ export default function SerpSocialPreviewPlayground() {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Example</span>
+      <div className="flex min-w-0 flex-wrap items-center gap-2">
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Example</span>
         {(['good', 'poor', 'custom'] as const).map((m) => (
           <button
             key={m}
@@ -321,7 +321,7 @@ export default function SerpSocialPreviewPlayground() {
             {m === 'good' ? 'Good' : m === 'poor' ? 'Poor' : 'Custom'}
           </button>
         ))}
-        <label className="inline-flex items-center gap-2 ml-auto text-xs font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
+        <label className="ml-0 inline-flex w-full cursor-pointer items-center gap-2 text-xs font-medium text-slate-700 dark:text-slate-300 sm:ml-auto sm:w-auto">
           <input
             type="checkbox"
             checked={richResult}
@@ -332,8 +332,8 @@ export default function SerpSocialPreviewPlayground() {
         </label>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="space-y-3">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-2">
+        <div className="min-w-0 space-y-3">
           <div>
             <label htmlFor={`${idPrefix}-title`} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Title <span className="font-mono text-slate-500 font-normal">({titleLen} chars)</span>
@@ -425,7 +425,7 @@ export default function SerpSocialPreviewPlayground() {
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <div>
             <div className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">
               Google search (mock)
@@ -438,7 +438,7 @@ export default function SerpSocialPreviewPlayground() {
                 </div>
               )}
               <div className="text-base text-sky-700 dark:text-sky-400 leading-snug line-clamp-2">{title || '(no title)'}</div>
-              <div className="text-xs text-emerald-700 dark:text-emerald-400 font-mono mt-1 truncate">{url || 'https://'}</div>
+              <div className="mt-1 break-all font-mono text-xs text-emerald-700 dark:text-emerald-400">{url || 'https://'}</div>
               <p className="text-sm text-slate-700 dark:text-slate-300 mt-2 line-clamp-3">{description || '(no description)'}</p>
               {richResult && (
                 <p className="text-[11px] text-slate-500 dark:text-slate-500 mt-2 italic">

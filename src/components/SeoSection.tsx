@@ -6,7 +6,7 @@ interface SeoSectionProps {
 
 export default function SeoSection({ id, children, className = '' }: SeoSectionProps) {
   return (
-    <section id={id} className={`scroll-mt-24 ${className}`}>
+    <section id={id} className={`scroll-mt-24 min-w-0 break-words [overflow-wrap:anywhere] ${className}`}>
       {children}
     </section>
   );
