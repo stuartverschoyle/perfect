@@ -4,8 +4,10 @@
  * You may use `https://yoursite.netlify.app` or just `yoursite.netlify.app` — we default missing schemes to https.
  */
 function normalizeSiteUrl(input: string): string {
-  const s = input.trim().replace(/\/$/, '');
+  let s = input.trim().replace(/\/$/, '');
   if (!s) return '';
+  // Protocol-relative (//host/path) → https
+  if (/^\/\//.test(s)) return `https:${s}`;
   if (/^https?:\/\//i.test(s)) return s;
   return `https://${s}`;
 }
