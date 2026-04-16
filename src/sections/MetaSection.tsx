@@ -200,7 +200,7 @@ export default function MetaSection() {
           <div className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden max-w-sm bg-slate-50 dark:bg-slate-950 shadow-sm">
             <div className="relative aspect-[1200/630] w-full bg-slate-200 dark:bg-slate-800">
               <img
-                src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop"
+                src="/laptop-and-computer.webp"
                 alt=""
                 width={1200}
                 height={630}
@@ -220,14 +220,14 @@ export default function MetaSection() {
             </div>
           </div>
           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2">
-            Preview uses the same public image URL as in the <code className="font-mono text-sky-700 dark:text-sky-300">og:image</code> example below (1200×630 crop).
+            Preview uses the same public image URL as in the <code className="font-mono text-sky-700 dark:text-sky-300">og:image</code> example below (intrinsic 1200×630, the usual share-card size).
           </p>
         </div>
         <CodeBlock
           language="html"
           code={`<meta property="og:title" content="How to Build the Perfect SEO Web Page | SEO Guide 2026" />
 <meta property="og:description" content="Learn every element of a perfectly optimized web page for SEO. From meta tags and heading structure to image optimization and schema markup — your complete guide." />
-<meta property="og:image" content="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop" />
+<meta property="og:image" content="/laptop-and-computer.webp" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://example.com/seo-guide/perfect-web-page" />
@@ -237,7 +237,7 @@ export default function MetaSection() {
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="How to Build the Perfect SEO Web Page | SEO Guide 2026" />
 <meta name="twitter:description" content="Learn every element of a perfectly optimized web page for SEO. From meta tags and heading structure to image optimization and schema markup — your complete guide." />
-<meta name="twitter:image" content="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop" />`}
+<meta name="twitter:image" content="/laptop-and-computer.webp" />`}
         />
       </div>
 

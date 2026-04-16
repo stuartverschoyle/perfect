@@ -6,8 +6,7 @@ const GOOD = {
   url: 'https://example.com/seo-guide/perfect-web-page',
   description:
     'Learn every element of a perfectly optimized web page for SEO. From meta tags and heading structure to image optimization and schema markup — your complete guide.',
-  ogImage:
-    'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop',
+  ogImage: '/laptop-and-computer.webp',
 };
 
 const POOR = {
@@ -188,6 +187,13 @@ function analyzeMetaQuality(title: string, url: string, description: string, ogI
       status: 'warn',
       hint: 'Social networks fall back to guessing a thumbnail or show a blank card — set og:image (often ~1200×630) for stronger shares.',
     });
+  } else if (img.startsWith('/')) {
+    checks.push({
+      id: 'i-path',
+      label: 'og:image URL',
+      status: 'good',
+      hint: 'Root-relative path loads in this preview; in production meta tags, use a full https:// URL so social crawlers resolve it.',
+    });
   } else {
     try {
       const normalized = img.startsWith('http') ? img : `https://${img}`;
@@ -268,6 +274,14 @@ export default function SerpSocialPreviewPlayground() {
   const descLen = description.length;
 
   const quality = useMemo(() => analyzeMetaQuality(title, url, description, ogImageUrl), [title, url, description, ogImageUrl]);
+
+  const ogImageDisplaySrc = useMemo(() => {
+    const u = ogImageUrl.trim();
+    if (!u) return '';
+    if (u.startsWith('/')) return u;
+    if (u.startsWith('http')) return u;
+    return `https://${u}`;
+  }, [ogImageUrl]);
 
   const verdictStyles: Record<QualityVerdict, { bar: string; badge: string; label: string; lead: string }> = {
     good: {
@@ -385,7 +399,7 @@ export default function SerpSocialPreviewPlayground() {
             </label>
             <input
               id={`${idPrefix}-ogimg`}
-              type="url"
+              type="text"
               value={ogImageUrl}
               onChange={(e) => {
                 setMode('custom');
@@ -456,7 +470,7 @@ export default function SerpSocialPreviewPlayground() {
               <div className="relative aspect-[1200/630] max-h-52 w-full bg-slate-200 dark:bg-slate-700">
                 {ogImageUrl.trim() && !ogImageError ? (
                   <img
-                    src={ogImageUrl.trim().startsWith('http') ? ogImageUrl.trim() : `https://${ogImageUrl.trim()}`}
+                    src={ogImageDisplaySrc}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover"
                     onError={() => setOgImageError(true)}

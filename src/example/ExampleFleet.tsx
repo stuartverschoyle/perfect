@@ -32,7 +32,7 @@ const steps = [
   {
     name: 'Measure',
     category: 'Step 4',
-    image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop',
+    image: '/laptop-and-computer.webp',
     alt: 'Analytics dashboard showing traffic, conversions, and search performance metrics',
     time: 'Weekly',
     difficulty: 'Intermediate',

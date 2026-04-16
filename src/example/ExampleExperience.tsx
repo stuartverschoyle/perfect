@@ -153,10 +153,10 @@ export default function ExampleExperience() {
 
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop"
-                alt="Website analytics dashboard showing traffic growth and improved search rankings after optimisation"
-                width={800}
-                height={1000}
+                src="/laptop-and-computer.webp"
+                alt="Laptop and desktop computer on a desk, representing analytics and optimisation work"
+                width={1200}
+                height={630}
                 loading="lazy"
                 className="w-full rounded-xl object-cover aspect-[4/5]"
               />
